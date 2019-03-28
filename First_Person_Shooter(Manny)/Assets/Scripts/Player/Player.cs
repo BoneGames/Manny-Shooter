@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IKillable {
 
     #region Variables
     [Header("Mechanics")]
@@ -12,8 +13,13 @@ public class Player : MonoBehaviour {
     public float gravity = 10f;
     public float crouchSpeed = 4f;
     public float jumpHeight = 20f;
+    public int maxJumps = 2;
     public float interactRange = 10f;
     public float groundRayDistance = 1.1f;
+
+    [Header("UI")]
+    public GameObject interactUIPrefab; // Prefab of text to show up when interacting
+    public Transform interactUIParent; // Transform (panel) to attach it to on start
 
     [Header("References")]
     public Camera attachedCamera;
@@ -30,6 +36,13 @@ public class Player : MonoBehaviour {
     public Weapon currentWeapon;
     private List<Weapon> weapons = new List<Weapon>();
     private int currentWeaponIndex = 0;
+
+    // UI
+    private GameObject interactUI; // store instantiated UI prefab
+    public TextMeshProUGUI interactText; // Get Component from copy of prefab
+
+
+    private int jumps = 0;
     #endregion
 
     void OnDrawGizmos()
@@ -51,7 +64,8 @@ public class Player : MonoBehaviour {
     }
     void CreateUI()
     {
-
+        interactUI = Instantiate(interactUIPrefab, interactUIParent);
+        interactText = interactUI.GetComponentInChildren<TextMeshProUGUI>();
     }
     void RegisterWeapons()
     {
@@ -131,21 +145,36 @@ public class Player : MonoBehaviour {
         // Is the controller grounded?
         Ray groundRay = new Ray(transform.position, -transform.up);
         RaycastHit hit;
-        if(Physics.Raycast(groundRay, out hit, groundRayDistance))
+
+        bool isGrounded = Physics.Raycast(groundRay, out hit, groundRayDistance);
+        bool isJumping = Input.GetButtonDown("Jump");
+        bool canJump = jumps < maxJumps; // jumps = int, maxJumps = int
+
+        // Is grounded?
+        if (isGrounded)
         {
-            // if jump is pressed
-            if(Input.GetButtonDown("Jump"))
+            // If jump is pressed?
+            if (isJumping)
             {
-                // move controller up
+                jumps = 1;
+                // Move controller up
                 movement.y = jumpHeight;
             }
         }
-       
-        // move controller up
-        // apply gravity
-        movement.y -= gravity * Time.deltaTime;
+        // Is NOT grounded?
+        else
+        {
+            if (isJumping && canJump)
+            {
+                movement.y = jumpHeight * jumps;
+                jumps++;
+            }
+        }
+        // Limit the gravity 
         movement.y = Mathf.Max(movement.y, -gravity);
-        // move controller
+        // Apply gravity
+        movement.y -= gravity * Time.deltaTime;
+        // Move the controller
         controller.Move(movement * Time.deltaTime);
     }
     /// <summary>
@@ -177,4 +206,14 @@ public class Player : MonoBehaviour {
         Switching();
         Interact();
 	}
+
+    public void Kill()
+    {
+
+    }
+
+    public void TakeDamage(int damage)
+    {
+       
+    }
 }

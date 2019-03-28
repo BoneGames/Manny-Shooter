@@ -22,7 +22,7 @@ GameObject:
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -37,7 +37,7 @@ GameObject:
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -51,6 +51,9 @@ GameObject:
   - component: {fileID: 4732875552030870}
   - component: {fileID: 33686775101593976}
   - component: {fileID: 23888839952123390}
+  - component: {fileID: 143115183648395006}
+  - component: {fileID: 95009096730952314}
+  - component: {fileID: 114348642721138266}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Untagged
@@ -68,6 +71,7 @@ GameObject:
   - component: {fileID: 4908980982041638}
   - component: {fileID: 20999186537584866}
   - component: {fileID: 81324485622925350}
+  - component: {fileID: 114468933773788238}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -101,7 +105,7 @@ GameObject:
   m_Layer: 0
   m_Name: Elbow
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -116,7 +120,7 @@ GameObject:
   m_Layer: 0
   m_Name: AimTarget
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -272,7 +276,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6497b14a58fa5d43b38ae5e5e02d79c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -306,3 +310,80 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1608932441553090}
   m_Enabled: 1
+--- !u!95 &95009096730952314
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501387669551472}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114348642721138266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501387669551472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8dcf8542a80384d80b40aa03d27537, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  runSpeed: 7.5
+  walkSpeed: 6
+  gravity: 10
+  crouchSpeed: 4
+  jumpHeight: 5
+  maxJumps: 2
+  interactRange: 10
+  groundRayDistance: 1.1
+  interactUIPrefab: {fileID: 0}
+  interactUIParent: {fileID: 0}
+  attachedCamera: {fileID: 0}
+  hand: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  interacttext: {fileID: 0}
+--- !u!114 &114468933773788238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608932441553090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d8d400eb0e2ef44a9e0d08a2f2ddd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showCursor: 1
+  speed: {x: 120, y: 120}
+  yMinLimit: -80
+  yMaxLimit: 80
+  invertControls: 0
+--- !u!143 &143115183648395006
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501387669551472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}

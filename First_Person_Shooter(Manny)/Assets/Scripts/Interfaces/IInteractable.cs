@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour {
-
-	
+public interface IInteractable
+{
+    void Pickup();
+    void Drop();
 }
