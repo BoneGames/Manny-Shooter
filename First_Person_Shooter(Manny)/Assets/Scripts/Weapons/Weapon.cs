@@ -30,6 +30,7 @@ public class Weapon : MonoBehaviour, IInteractable {
 
     void Awake()
     {
+        shotOrigin = GameObject.Find("ShotOrigin").transform;
         GetReferences();
     }
 
@@ -83,6 +84,11 @@ public class Weapon : MonoBehaviour, IInteractable {
         {
             canShoot = true;
         }
+    }
+
+    public virtual string GetTitle()
+    {
+        return "Weapon";
     }
 
     public void Pickup()

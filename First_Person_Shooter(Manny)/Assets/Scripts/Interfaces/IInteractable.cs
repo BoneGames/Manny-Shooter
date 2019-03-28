@@ -6,4 +6,5 @@ public interface IInteractable
 {
     void Pickup();
     void Drop();
+    string GetTitle();
 }
